@@ -34,10 +34,10 @@ def create_app(congig_class=Config):
         fmt = '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
         file_handler.setFormatter(logging.Formatter(fmt=fmt))
         file_handler.setLevel(logging.INFO)
-        app.logger.addHandler(file_handler)
+        app.logger.addHandler(file_handler) # pylint: disable=maybe-no-member
 
-        app.logger.setLevel(logging.INFO)
-        app.logger.info('Start Logging')
+        app.logger.setLevel(logging.INFO) # pylint: disable=maybe-no-member
+        app.logger.info('Start Logging') # pylint: disable=maybe-no-member
     
     return app
 
