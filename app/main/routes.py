@@ -3,12 +3,6 @@ from flask import render_template
 
 from app.main import bp
 
-@bp.route('/')
-def health():
-    return jsonify({
-        'success': True,
-        'code': 200
-    })
 
 @bp.route('/index')
 def index():
