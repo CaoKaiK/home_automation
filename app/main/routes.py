@@ -7,4 +7,4 @@ from app.main import bp
 @bp.route('/index')
 def index():
     user = {'username': 'Niklas'}
-    return render_template('index.html', title='Page Title', user=user)
+    return render_template('main/index.html', title='Page Title', user=user)
