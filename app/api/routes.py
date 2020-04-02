@@ -6,6 +6,7 @@ from app.models import RoomSchema, ThingSchema
 from app.api import bp
 from app.api import errors as api_error
 
+# check for content type json / ignore for GET-requests
 @bp.before_request
 def check_content_type():
     if request.content_type != 'application/json':
@@ -14,6 +15,7 @@ def check_content_type():
         else:
             abort(406)
 
+# check for accept type json
 @bp.before_request
 def check_accept():
     if request.accept_mimetypes.accept_json:
@@ -36,6 +38,15 @@ def get_rooms():
         'success': True,
         'result': rooms_schema.dump(rooms)
     }, 200
+
+@bp.route('/rooms/<int:id>', methods=['GET'])
+def get_room(id):
+    room = Room.query.filter_by(id=id).one_or_none()
+    room_schema = RoomSchema()
+    return {
+        'success': True,
+        'result': room_schema.dump(room)
+    }
 
 @bp.route('/things', methods=['GET'])
 def get_things():
