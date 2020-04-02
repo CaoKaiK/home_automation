@@ -4,21 +4,25 @@ import os
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
 from flask_migrate import Migrate
+
 
 from config import Config
 
 db = SQLAlchemy()
+ma = Marshmallow()
 migrate = Migrate()
+
 
 def create_app(congig_class=Config):
     app = Flask(__name__)
     app.config.from_object(Config)
 
     db.init_app(app)
+    ma.init_app(app)
     migrate.init_app(app, db)
 
-    
     # Error Blueprints
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)

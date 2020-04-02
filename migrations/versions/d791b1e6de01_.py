@@ -1,8 +1,8 @@
-"""Set up Rooms and Things
+"""empty message
 
-Revision ID: 23233ba2a4c7
+Revision ID: d791b1e6de01
 Revises: 
-Create Date: 2020-03-31 19:16:15.324920
+Create Date: 2020-04-01 20:56:01.339034
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '23233ba2a4c7'
+revision = 'd791b1e6de01'
 down_revision = None
 branch_labels = None
 depends_on = None

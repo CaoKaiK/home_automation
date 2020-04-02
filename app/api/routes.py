@@ -1,6 +1,7 @@
 from flask import jsonify, request, abort
 from app import db
 from app.models import Room, Thing
+from app.models import RoomSchema, ThingSchema
 
 from app.api import bp
 from app.api import errors as api_error
@@ -20,8 +21,6 @@ def check_accept():
     else:
         abort(415)
 
-
-
 @bp.route('/status', methods=['GET'])
 def health():
     return jsonify({
@@ -32,7 +31,26 @@ def health():
 @bp.route('/rooms', methods=['GET'])
 def get_rooms():
     rooms = Room.query.all()
-    return jsonify({
-        'result': {},
+    rooms_schema = RoomSchema(many=True)
+    return {
+        'success': True,
+        'result': rooms_schema.dump(rooms)
+    }, 200
 
-    }), 200
+@bp.route('/things', methods=['GET'])
+def get_things():
+    things = Thing.query.all()
+    things_schema = ThingSchema(many=True)
+    return {
+        'success': True,
+        'result': things_schema.dump(things)
+    }
+
+@bp.route('/things/<int:id>', methods=['GET'])
+def get_thing(id):
+    thing = Thing.query.filter_by(id=id).one_or_none()
+    thing_schema = ThingSchema()
+    return {
+        'success': True,
+        'result': thing_schema.dump(thing)
+    }
