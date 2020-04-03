@@ -13,10 +13,21 @@ class Room(db.Model):
     def total_things(self):
         return len(self.things.all())
 
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+    
+    def patch(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
 
     def __repr__(self):
         return f'<Room {self.name}>'
     
+
 
 class Thing(db.Model):
     id = Column(Integer, primary_key=True)
