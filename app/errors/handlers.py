@@ -1,6 +1,7 @@
 from flask import render_template, request, jsonify
 from app.errors import bp
 from app.api.errors import ApiError
+from app.auth.errors import AuthError
 
 def wants_json_response():
     return request.accept_mimetypes['application/json'] >= \
@@ -15,6 +16,15 @@ def api_error(ApiError):
         return ApiError.to_response()
     
     return render_template(f'errors/{ApiError.status_code}.html'), ApiError.status_code
+
+@bp.app_errorhandler(AuthError)
+def auth_error(AuthError):
+    # Error raised during Auth
+    # check if json response expected
+    if wants_json_response():
+        return AuthError.to_response()
+    
+    return render_template(f'errors/{AuthError.status_code}.html'), AuthError.status_code)
 
 @bp.app_errorhandler(404)
 def not_found_error(error):
