@@ -29,20 +29,3 @@ def method_not_allowed(error):
         return error.to_response()
     return render_template('errors/404.html') , 405
 
-@bp.app_errorhandler(406)
-def not_accepted(error):
-    if wants_json_response():
-        content = request.content_type
-        message=f'Header: Content-Type must be "application/json". Header Parameter Content-Type was {content}'
-        error = ApiError(status_code=406, message=message, endpoint=request.url)
-        return error.to_response()
-    return render_template('errors/404.html') , 406
-
-@bp.app_errorhandler(415)
-def accept_not_accepted(error):
-    if wants_json_response():
-        accept = request.accept_mimetypes
-        message=f'Header: Accept must allow json. Header Parameter Accept was {accept}'
-        error = ApiError(status_code=415, message=message, endpoint=request.url)
-        return error.to_response()
-    return render_template('errors/404.html') , 415
