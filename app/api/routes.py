@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import jsonify, request, abort
 from app import db
 from app.models import Room, Thing
@@ -31,7 +32,7 @@ things_schema = ThingSchema(many=True)
 @bp.before_request
 def check_content_type():
     if request.content_type != 'application/json':
-        if request.method == 'GET' or 'DELETE':
+        if request.method in ['GET', 'DELETE']:
             pass
         else:
             content = request.content_type
@@ -129,24 +130,100 @@ def delete_room(id):
     }
 
 
-
 ### Thing ###
 @bp.route('/things', methods=['GET'])
 def get_things():
-    things = Thing.query.all()
-    things_schema = ThingSchema(many=True)
+    location = request.args.get('room', None)
+    if location:
+        things = Thing.query.filter_by(room_id=location).all()
+    else:
+        things = Thing.query.all()
     return {
         'success': True,
         'result': things_schema.dump(things)
     }
 
+@bp.route('/things', methods=['POST'])
+def post_thing():
+    json_data = validate_content(request, ['name', 'room_id'])
+    name = json_data['name']
+    room_id = json_data['room_id']
+
+    room = Room.query.filter_by(id=room_id).one_or_none()
+    # 404 - if room does not exist
+    if not room:
+        raise ApiError(404, 'The requested room was not found', request.url)
+    
+    thing = Thing(name=name, room_id=room_id)
+    thing.insert()
+    return {
+        'success': True,
+        'result': thing_schema.dump(thing)
+    }
+
 @bp.route('/things/<int:id>', methods=['GET'])
 def get_thing(id):
     thing = Thing.query.filter_by(id=id).one_or_none()
+    # 404 - if thing does not exist
     if not thing:
         raise ApiError(404, 'The requested thing was not found', request.url)
 
-    thing_schema = ThingSchema()
+    return {
+        'success': True,
+        'result': thing_schema.dump(thing)
+    }
+
+
+@bp.route('/things/<int:id>', methods=['PATCH'])
+def rename_thing(id):
+    json_data = validate_content(request, ['name'])
+    name = json_data['name']
+
+    thing = Thing.query.filter_by(id=id).one_or_none()
+    # 404 - if thing does not exist
+    if not thing:
+        raise ApiError(404, 'The requested thing was not found', request.url)
+    
+    thing.name = name
+    thing.patch()
+
+    return {
+        'success': True,
+        'result': thing_schema.dump(thing)
+    }
+
+@bp.route('/things/<int:id>', methods=['DELETE'])
+def delete_thing(id):
+    thing = Thing.query.filter_by(id=id).one_or_none()
+    # 404 - if thing does not exist
+    if not thing:
+        raise ApiError(404, 'The requested thing was not found', request.url)
+    
+    name = thing.name
+    thing.delete()
+
+    return {
+        'success': True,
+        'result': {},
+        'message': f'Thing {name} was deleted'
+    }
+
+@bp.route('things/<int:id>/flip', methods=['PATCH'])
+def flip_a_thing(id):
+    thing = Thing.query.filter_by(id=id).one_or_none()
+    # 404 - if thing does not exist
+    if not thing:
+        raise ApiError(404, 'The requested thing was not found', request.url)
+    
+    # flip and save flipping time
+    if thing.status:
+        thing.status = False
+    else:
+        thing.status = True
+    thing.last_switched = datetime.utcnow()
+
+    thing.patch()
+
     return {
         'success': True,
         'result': thing_schema.dump(thing)

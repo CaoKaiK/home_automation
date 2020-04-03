@@ -3,6 +3,7 @@ from sqlalchemy import Column, Integer, String, DateTime, Boolean
 from marshmallow import Schema, fields
 from app import db, ma
 
+
 class Room(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(24), index=True, unique=True)
@@ -16,7 +17,7 @@ class Room(db.Model):
     def insert(self):
         db.session.add(self)
         db.session.commit()
-    
+
     def patch(self):
         db.session.commit()
 
@@ -28,14 +29,24 @@ class Room(db.Model):
         return f'<Room {self.name}>'
     
 
-
 class Thing(db.Model):
     id = Column(Integer, primary_key=True)
-    name = Column(String(24), index=True, unique=True)
+    name = Column(String(24), index=True)
     created_on = Column(DateTime, default=datetime.utcnow)
     room_id = Column(Integer, db.ForeignKey('room.id')) # pylint: disable=maybe-no-member
     status = Column(Boolean, default=False)
     last_switched = Column(DateTime, default=datetime.utcnow)
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def patch(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
 
     def __repr__(self):
         return f'<Thing {self.name}>'
