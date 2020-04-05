@@ -31,7 +31,7 @@ def create_app(congig_class=Config):
     app.register_blueprint(main_bp)
     # Auth Blueprints
     from app.auth import bp as auth_bp
-    app.register_blueprint(auth_bp)
+    app.register_blueprint(auth_bp, url_prefix='/auth')
     # API Blueprints
     from app.api import bp as api_bp
     app.register_blueprint(api_bp, url_prefix='/api')

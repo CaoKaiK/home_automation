@@ -3,6 +3,7 @@ from app.errors import bp
 from app.api.errors import ApiError
 from app.auth.errors import AuthError
 
+# check if json response expected
 def wants_json_response():
     return request.accept_mimetypes['application/json'] >= \
         request.accept_mimetypes['text/html']
@@ -11,7 +12,6 @@ def wants_json_response():
 @bp.app_errorhandler(ApiError)
 def api_error(ApiError):
     # Error raised in API
-    # check if json response expected
     if wants_json_response():
         return ApiError.to_response()
     
@@ -20,7 +20,6 @@ def api_error(ApiError):
 @bp.app_errorhandler(AuthError)
 def auth_error(AuthError):
     # Error raised during Auth
-    # check if json response expected
     if wants_json_response():
         return AuthError.to_response()
     

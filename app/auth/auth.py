@@ -6,6 +6,10 @@ from jose import jwt
 
 from app.auth.errors import AuthError
 
+AUTH0_DOMAIN = 'caokai.eu.auth0.com'
+ALGORITHMS = ['RS256']
+API_AUDIENCE = 'home_automation'
+
 # Auth Header
 def get_token_auth_header():
     auth = request.headers.get('Authorization', None)
@@ -49,7 +53,6 @@ def verify_decode_jwt(token):
 
     unverified_header = jwt.get_unverified_header(token)
     rsa_key = {}
-
 
     key = keys[0]
 
