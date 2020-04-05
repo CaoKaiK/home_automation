@@ -7,6 +7,14 @@ from app.models import RoomSchema, ThingSchema
 from app.api import bp
 from app.api.errors import ApiError
 
+# init schemas
+room_schema = RoomSchema()
+rooms_schema = RoomSchema(many=True)
+
+thing_schema = ThingSchema()
+things_schema = ThingSchema(many=True)
+
+
 def validate_content(request, params=[]):
     json_data = request.get_json(silent=True)
     # 406 - if content empty or not parsable
@@ -20,13 +28,6 @@ def validate_content(request, params=[]):
             raise ApiError(400, f'Parameter {param} is missing', request.url)
 
     return json_data
-
-# init schemas
-room_schema = RoomSchema()
-rooms_schema = RoomSchema(many=True)
-
-thing_schema = ThingSchema()
-things_schema = ThingSchema(many=True)
 
 # check for content type json / ignore for GET and DELETE requests
 @bp.before_request

@@ -23,7 +23,7 @@ def auth_error(AuthError):
     if wants_json_response():
         return AuthError.to_response()
     
-    return render_template(f'errors/{AuthError.status_code}.html'), AuthError.status_code)
+    return render_template(f'errors/{AuthError.status_code}.html'), AuthError.status_code
 
 @bp.app_errorhandler(404)
 def not_found_error(error):
