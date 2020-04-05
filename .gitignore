@@ -5,3 +5,6 @@ __pycache__
 logs/
 
 *.sqlite
+
+# Tailwind CSS
+node_modules/
