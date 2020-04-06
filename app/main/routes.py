@@ -1,5 +1,5 @@
-from flask import jsonify
-from flask import render_template
+from flask import jsonify, render_template, session
+
 
 from app.main import bp
 
@@ -7,4 +7,5 @@ from app.main import bp
 @bp.route('/index')
 def index():
     user = {'username': 'Niklas'}
+    
     return render_template('main/index.html', title='Page Title', user=user)
