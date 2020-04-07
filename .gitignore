@@ -7,4 +7,5 @@ logs/
 *.sqlite
 
 # Tailwind CSS
+development
 node_modules/
