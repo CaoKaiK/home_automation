@@ -1,6 +1,7 @@
 import json
-from flask import jsonify, request, redirect, session, url_for
+from flask import jsonify, request, redirect, session, url_for, abort
 from app import oauth
+import requests
 
 
 from app.auth import bp
@@ -33,4 +34,20 @@ def callback():
     token = response.get('access_token')
     #print(token)
     session["token"] = token
+    return redirect(url_for('main.index'))
+
+@bp.route('/logout')
+def logout():
+    #clear session
+    session.clear()
+
+    params = {
+        'client_id': config_auth0.CLIENT_ID
+    }
+
+    r = requests.get(config_auth0.API_BASE_URL + '/v2/logout', params=params)
+
+    if not r.status_code==200:
+        abort(500)
+
     return redirect(url_for('main.index'))
