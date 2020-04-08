@@ -34,7 +34,7 @@ def callback():
     token = response.get('access_token')
     #print(token)
     session["token"] = token
-    return redirect(url_for('main.index'))
+    return redirect(url_for('main.home'))
 
 @bp.route('/logout')
 def logout():
@@ -50,4 +50,4 @@ def logout():
     if not r.status_code==200:
         abort(500)
 
-    return redirect(url_for('main.index'))
+    return redirect(url_for('main.home'))

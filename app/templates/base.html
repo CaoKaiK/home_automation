@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Automation</title>
+    <link rel="stylesheet" href="/static/css/tailwind.css">
+</head>
+
+<header class="flex items-center justify-between bg-green-700 opacity-75 p-3 pl-6 pr-6">
+    <a href="{{ url_for('main.home') }}"><div class="text-white text-xl font-bold tracking-wider">Home Automation</div></a>
+    {% if session["token"] %}
+        <a href="{{ url_for('auth.logout') }}" class="button bg-orange-600 text-white hover:bg-orange-700 text-sm font-bold p-2 rounded shadow">Logout</a>
+    {% else %}
+        <a href="{{ url_for('auth.login') }}" class="button bg-orange-600 text-white hover:bg-orange-700 text-sm font-bold p-2 rounded shadow">Login</a>
+    {% endif %}
+</header>
+
+<body class="bg-gray-100">
+    {% block body %}
+    
+    {% endblock body %}
+</body>
+
+</html>
