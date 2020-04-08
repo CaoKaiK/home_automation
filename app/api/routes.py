@@ -7,6 +7,8 @@ from app.models import RoomSchema, ThingSchema
 from app.api import bp
 from app.api.errors import ApiError
 
+from app.auth.auth import requires_auth
+
 # init schemas
 room_schema = RoomSchema()
 rooms_schema = RoomSchema(many=True)
@@ -115,6 +117,7 @@ def patch_room(id):
     }
 
 @bp.route('/rooms/<int:id>', methods=['DELETE'])
+@requires_auth('delete:rooms')
 def delete_room(id):
     room = Room.query.filter_by(id=id).one_or_none()
     # 404 - if room does not exist
@@ -194,6 +197,7 @@ def rename_thing(id):
     }
 
 @bp.route('/things/<int:id>', methods=['DELETE'])
+@requires_auth('delete:things')
 def delete_thing(id):
     thing = Thing.query.filter_by(id=id).one_or_none()
     # 404 - if thing does not exist
@@ -210,7 +214,8 @@ def delete_thing(id):
     }
 
 @bp.route('things/<int:id>/flip', methods=['PATCH'])
-def flip_a_thing(id):
+@requires_auth('flip:things')
+def flip_a_thing(payload, id):
     thing = Thing.query.filter_by(id=id).one_or_none()
     # 404 - if thing does not exist
     if not thing:

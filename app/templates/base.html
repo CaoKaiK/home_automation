@@ -37,6 +37,7 @@
         xhttp.open("PATCH", BASE_URL.concat('/things/').concat(thingId).concat('/flip'), true)
         xhttp.setRequestHeader("Content-Type", "application/json")
         xhttp.setRequestHeader("Accept", "*/*")
+        xhttp.setRequestHeader("Authorization", "Bearer ".concat("{{ session['token'] }}") )
         xhttp.send()
 
         if ( document.getElementById(thingId).classList.contains("bg-green-500")) {
