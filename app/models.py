@@ -57,7 +57,7 @@ class RoomSchema(Schema):
     name = fields.String()
     created_on = fields.DateTime()
     total_things = fields.Int()
-    things = fields.Nested('ThingSchema', many=True, only=['id', 'name'])
+    things = fields.Nested('ThingSchema', many=True, only=['id', 'name', 'status'])
     
 
 class ThingSchema(Schema):

@@ -2,4 +2,22 @@
 
 {% block body %}
 
+{% for room in rooms %}
+<div class="bg-white rounded shadow-sm m-2">
+    <div class="text-gray-800 font-bold text-xl text-center p-2 mr-2 ml-2">{{ room.name }}</div>
+    {% for thing in room.things%}
+    <div class="flex items-center justify-between">
+        <div class="p-2">{{ thing.name }}</div>
+        {% if thing.status %}
+            <div id="{{ thing.id }}" class="rounded-lg bg-red-600 p-1 mr-3" onclick="flipThing({{thing.id}})">Off</div>
+        {% else %}
+            <div id="{{ thing.id }}" class="rounded-lg bg-green-500 p-1 mr-3" onclick="flipThing({{thing.id}})">On</div>
+        {% endif %}
+    </div>
+    {% endfor%}
+    
+</div>
+
+{% endfor %}
+
 {% endblock body %}

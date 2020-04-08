@@ -8,19 +8,45 @@
     <link rel="stylesheet" href="/static/css/tailwind.css">
 </head>
 
-<header class="flex items-center justify-between bg-green-700 opacity-75 p-3 pl-6 pr-6">
-    <a href="{{ url_for('main.home') }}"><div class="text-white text-xl font-bold tracking-wider">Home Automation</div></a>
-    {% if session["token"] %}
-        <a href="{{ url_for('auth.logout') }}" class="button bg-orange-600 text-white hover:bg-orange-700 text-sm font-bold p-2 rounded shadow">Logout</a>
-    {% else %}
-        <a href="{{ url_for('auth.login') }}" class="button bg-orange-600 text-white hover:bg-orange-700 text-sm font-bold p-2 rounded shadow">Login</a>
-    {% endif %}
-</header>
-
 <body class="bg-gray-100">
-    {% block body %}
+    <header class="flex items-center justify-between bg-green-700 opacity-75 p-3 pl-6 pr-6">
+        <a href="{{ url_for('main.home') }}"><div class="text-white text-xl font-bold tracking-wider">Home Automation</div></a>
+        {% if session["token"] %}
+            <a href="{{ url_for('auth.logout') }}" class="button bg-orange-600 text-white hover:bg-orange-700 text-sm font-bold p-2 rounded shadow">Logout</a>
+        {% else %}
+            <a href="{{ url_for('auth.login') }}" class="button bg-orange-600 text-white hover:bg-orange-700 text-sm font-bold p-2 rounded shadow">Login</a>
+        {% endif %}
+    </header>
     
-    {% endblock body %}
+    
+    <div class="flex flex-wrap">
+        {% if session["token"] %}
+            {% block body %}
+            {% endblock body %}
+        {% else %}
+        <div class="object-center">Please Login</div>
+        {% endif %}
+    </div>
+    
 </body>
+ 
+<script>
+    const BASE_URL = 'http://127.0.0.1:5000/api';
+    var xhttp = new XMLHttpRequest();
+    function flipThing(thingId) {
+        xhttp.open("PATCH", BASE_URL.concat('/things/').concat(thingId).concat('/flip'), true)
+        xhttp.setRequestHeader("Content-Type", "application/json")
+        xhttp.setRequestHeader("Accept", "*/*")
+        xhttp.send()
 
-</html>
+        if ( document.getElementById(thingId).classList.contains("bg-green-500")) {
+            document.getElementById(thingId).classList.remove("bg-green-500")
+            document.getElementById(thingId).classList.add("bg-red-600")
+            document.getElementById(thingId).innerHTML = "Off"
+        } else {
+            document.getElementById(thingId).classList.remove("bg-red-600")
+            document.getElementById(thingId).classList.add("bg-green-500")
+            document.getElementById(thingId).innerHTML = "On"
+        }
+    }
+</script>
