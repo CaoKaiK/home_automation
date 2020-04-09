@@ -1,0 +1,363 @@
+{
+	"info": {
+		"_postman_id": "dcda6281-52f5-4887-91ba-0e2cb817e004",
+		"name": "home_automation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "status",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api}}/status",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"status"
+					]
+				},
+				"description": "Check the status of the API endpoint"
+			},
+			"response": []
+		},
+		{
+			"name": "rooms",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api}}/rooms",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"rooms"
+					]
+				},
+				"description": "Get all Rooms"
+			},
+			"response": []
+		},
+		{
+			"name": "rooms",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Living Room\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api}}/rooms",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"rooms"
+					]
+				},
+				"description": "Get all Rooms"
+			},
+			"response": []
+		},
+		{
+			"name": "room",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Very long Room name\"\n}"
+				},
+				"url": {
+					"raw": "{{api}}/rooms/1",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"rooms",
+						"1"
+					]
+				},
+				"description": "Create a new room"
+			},
+			"response": []
+		},
+		{
+			"name": "room",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Sleeping Room\"\n}"
+				},
+				"url": {
+					"raw": "{{api}}/rooms/3",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"rooms",
+						"3"
+					]
+				},
+				"description": "Change Room name"
+			},
+			"response": []
+		},
+		{
+			"name": "room",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{api}}/rooms/1",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"rooms",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "things",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"New Name\"\n}"
+				},
+				"url": {
+					"raw": "{{api}}/things",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"things"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "things",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Lamp\",\n\t\"room_id\": 3\n}"
+				},
+				"url": {
+					"raw": "{{api}}/things",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"things"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "thing",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Television\"\n}"
+				},
+				"url": {
+					"raw": "{{api}}/things/2",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"things",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "flip thing",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api}}/things/2/flip",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"things",
+						"2",
+						"flip"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "thing",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Television\"\n}"
+				},
+				"url": {
+					"raw": "{{api}}/things/2",
+					"host": [
+						"{{api}}"
+					],
+					"path": [
+						"things",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik9FRkNRekk0TmpSRFFqVXhRVVUyT0RjMFJVSkNORVEzTTBVMU5USTJRVGcwUVRjME9EY3dPQSJ9.eyJpc3MiOiJodHRwczovL2Nhb2thaS5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWU4ZTJjMDQxZjFiOTgwYzBiM2YyMjlhIiwiYXVkIjpbImhvbWVfYXV0b21hdGlvbiIsImh0dHBzOi8vY2Fva2FpLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1ODY0Mzg4MzcsImV4cCI6MTU4NjUyNTIzNywiYXpwIjoiVTA4U0o3VjRubHVJbHo2Y2NiWGhoR2ZUQjhjU2oxRzYiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnJvb21zIiwiZGVsZXRlOnRoaW5ncyIsImZsaXA6dGhpbmdzIl19.bw5MlZLFGifoxwcJKWz_1_7Sv-_He6-NPdPC6FmjVDqU-lpqVA0PMi1BekIeilDq6889JSMDKBtRLecPKVv3cWU1DoH-PMvoRIJJOslVADOsqBxk8AQ09jM4UVglDrPL30zjs0_fD09ybrjz-k6eZgB-PKVRslMYtNJm07-cW6SMdYWJAGb8rG4fiHOxTvQ_EiRqXWtRWOzm3H7GNWZwhAUICAwu9mi8oiz9hGLTiZxy-fDnL96g03mL84T1DXEmbmtG5NPcExkCyH3MWbsCd-kRmx2XGWNcQYU_Hd40zIen8aC5gYUvv2UdY4EiXsfLyfcR1UEoYzUJa_3enRm6CQ",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "b961072c-9feb-43d5-b379-4a818229ab1f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "ce1bcc5c-6f69-4e01-83dc-6b31197a1a17",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "7671d0fd-c231-4216-b218-bd2da2660925",
+			"key": "api",
+			"value": "https://flask-home-automation.herokuapp.com/api",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
