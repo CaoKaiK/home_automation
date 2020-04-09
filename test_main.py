@@ -4,10 +4,12 @@ from app import create_app,db
 from app.models import Room, Thing
 from config import TestConfig
 
+JWT = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik9FRkNRekk0TmpSRFFqVXhRVVUyT0RjMFJVSkNORVEzTTBVMU5USTJRVGcwUVRjME9EY3dPQSJ9.eyJpc3MiOiJodHRwczovL2Nhb2thaS5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWU4ZTJjMDQxZjFiOTgwYzBiM2YyMjlhIiwiYXVkIjpbImhvbWVfYXV0b21hdGlvbiIsImh0dHBzOi8vY2Fva2FpLmV1LmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1ODY0Mzg4MzcsImV4cCI6MTU4NjUyNTIzNywiYXpwIjoiVTA4U0o3VjRubHVJbHo2Y2NiWGhoR2ZUQjhjU2oxRzYiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOnJvb21zIiwiZGVsZXRlOnRoaW5ncyIsImZsaXA6dGhpbmdzIl19.bw5MlZLFGifoxwcJKWz_1_7Sv-_He6-NPdPC6FmjVDqU-lpqVA0PMi1BekIeilDq6889JSMDKBtRLecPKVv3cWU1DoH-PMvoRIJJOslVADOsqBxk8AQ09jM4UVglDrPL30zjs0_fD09ybrjz-k6eZgB-PKVRslMYtNJm07-cW6SMdYWJAGb8rG4fiHOxTvQ_EiRqXWtRWOzm3H7GNWZwhAUICAwu9mi8oiz9hGLTiZxy-fDnL96g03mL84T1DXEmbmtG5NPcExkCyH3MWbsCd-kRmx2XGWNcQYU_Hd40zIen8aC5gYUvv2UdY4EiXsfLyfcR1UEoYzUJa_3enRm6CQ'
 
 HEADERS = {
     'content-type': 'application/json',
-    'accept': '*/*'
+    'accept': '*/*',
+    'Authorization': 'Bearer ' + JWT
 }
 
 
@@ -22,7 +24,7 @@ class ModelCase(unittest.TestCase):
 
     def setUp(self):
         self.app = create_app(TestConfig)
-        print(self.app.config['SQLALCHEMY_DATABASE_URI'])
+        # print(self.app.config['SQLALCHEMY_DATABASE_URI'])
         self.app_context = self.app.app_context()
         self.app_context.push()
         self.client = self.app.test_client()

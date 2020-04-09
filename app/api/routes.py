@@ -118,7 +118,7 @@ def patch_room(id):
 
 @bp.route('/rooms/<int:id>', methods=['DELETE'])
 @requires_auth('delete:rooms')
-def delete_room(id):
+def delete_room(payload, id):
     room = Room.query.filter_by(id=id).one_or_none()
     # 404 - if room does not exist
     if not room:
@@ -198,7 +198,7 @@ def rename_thing(id):
 
 @bp.route('/things/<int:id>', methods=['DELETE'])
 @requires_auth('delete:things')
-def delete_thing(id):
+def delete_thing(payload, id):
     thing = Thing.query.filter_by(id=id).one_or_none()
     # 404 - if thing does not exist
     if not thing:

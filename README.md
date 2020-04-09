@@ -30,9 +30,78 @@ The Token will be provided by logging in with the following test accounts:
 GET, POST api/health
 returns 200 OK if the server is running
 
+Permission: none
+
+Example response:
+'''json
+{
+  "code": 200,
+  "success": true
+}
+'''
+
 GET api/rooms
 returns a list of rooms and their respective things
 
+Permission: None
 
+Example response:
+'''json
+{
+  "result": [
+    {
+      "created_on": "2020-04-08T17:52:51.234417",
+      "id": 1,
+      "name": "Test Room",
+      "things": [
+        {
+          "id": 1,
+          "name": "New Thing 1",
+          "status": false
+        },
+        {
+          "id": 2,
+          "name": "New Thing 2",
+          "status": true
+        }
+      ],
+      "total_things": 2
+    },
+    {
+      "created_on": "2020-04-08T17:52:59.897353",
+      "id": 2,
+      "name": "Test Room 2",
+      "things": [],
+      "total_things": 0
+    },
+    {
+      "created_on": "2020-04-08T17:53:06.420439",
+      "id": 3,
+      "name": "Test Room 3",
+      "things": [
+        {
+          "id": 3,
+          "name": "New Thing 3",
+          "status": false
+        },
+        {
+          "id": 4,
+          "name": "New Thing 4",
+          "status": true
+        }
+      ],
+      "total_things": 2
+    },
+    {
+      "created_on": "2020-04-08T18:28:11.568399",
+      "id": 4,
+      "name": "Very long Room name",
+      "things": [],
+      "total_things": 0
+    }
+  ],
+  "success": true
+}
+'''
 
 

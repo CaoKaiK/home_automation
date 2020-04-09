@@ -51,3 +51,6 @@ def logout():
         abort(500)
 
     return redirect(url_for('main.home'))
+
+    # Manual Logout
+    # https://caokai.eu.auth0.com/v2/logout
