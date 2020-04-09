@@ -29,7 +29,7 @@ The Token will be provided by logging in with the following test accounts:
 
 ### Endpoints
 
-GET, POST api/health
+#### GET, POST api/health
 returns 200 OK if the server is running
 
 Parameter: none
@@ -46,7 +46,7 @@ Example response:
 }
 ```
 
-GET api/rooms
+#### GET api/rooms
 returns a list of rooms and their respective things
 
 Parameter: none
@@ -114,7 +114,7 @@ Example response:
 }
 ```
 
-POST api/rooms
+#### POST api/rooms
 Creates a room with the requested name.
 
 Parameter: none
@@ -139,7 +139,7 @@ Example response:
 }
 ```
 
-GET api/rooms/id
+#### GET api/rooms/id
 Get the information of a room.
 
 Parameter: id
@@ -162,7 +162,7 @@ Example response:
 }
 ```
 
-PATCH api/rooms/id
+#### PATCH api/rooms/id
 Change the name of a room
 
 Parameter: id
@@ -185,7 +185,7 @@ Example response:
 }
 ```
 
-DELETE api/rooms/id
+#### DELETE api/rooms/id
 Delete a room with room id
 
 Parameter: id = room_id
@@ -208,7 +208,7 @@ Example response:
 }
 ```
 
-GET api/things
+#### GET api/things
 Get a list of all things or filtered by location
 
 Parameter: room
@@ -249,7 +249,7 @@ api/things?room=1
 }
 ```
 
-POST api/things
+#### POST api/things
 Create a thing in a room
 
 Parameter: none
@@ -276,7 +276,7 @@ Example response:
 }
 ```
 
-GET api/things/id
+#### GET api/things/id
 Get details on a thing
 
 Parameter: none
@@ -303,7 +303,7 @@ Example response:
 }
 ```
 
-PATCH api/things/id
+#### PATCH api/things/id
 Rename a thing
 
 Parameter: none
@@ -330,7 +330,7 @@ Example response:
 }
 ```
 
-DELETE api/things/id
+#### DELETE api/things/id
 Delete a thing
 
 Parameter: none
@@ -348,7 +348,7 @@ Example response:
 }
 ```
 
-PATCH api/things/id/flip
+#### PATCH api/things/id/flip
 Flip a thing from on to off and vice versa
 
 Parameter: none
