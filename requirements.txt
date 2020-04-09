@@ -46,3 +46,7 @@ urllib3==1.25.8
 wcwidth==0.1.9
 Werkzeug==1.0.0
 wrapt==1.11.2
+
+
+psycopg2==2.7.3.1
+gunicorn==19.7.1
