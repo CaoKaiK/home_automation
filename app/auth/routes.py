@@ -1,3 +1,4 @@
+import os
 import json
 from flask import jsonify, request, redirect, session, url_for, abort
 from app import oauth
@@ -24,7 +25,7 @@ auth0 = oauth.register(
 @bp.route('/login')
 def login():
     # redirect to auth0 url
-    return auth0.authorize_redirect(audience=config_auth0.AUDIENCE,redirect_uri='http://127.0.0.1:5000/auth/callback')
+    return auth0.authorize_redirect(audience=config_auth0.AUDIENCE,redirect_uri='https://flask-home-automation.herokuapp.com/auth/callback')
 
     
 @bp.route('/callback')

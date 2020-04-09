@@ -32,7 +32,7 @@
 </body>
  
 <script>
-    const BASE_URL = 'http://127.0.0.1:5000/api';
+    const BASE_URL = 'https://flask-home-automation.herokuapp.com/api';
     var xhttp = new XMLHttpRequest();
     function flipThing(thingId) {
         xhttp.open("PATCH", BASE_URL.concat('/things/').concat(thingId).concat('/flip'), true)
