@@ -33,12 +33,12 @@ returns 200 OK if the server is running
 Permission: none
 
 Example response:
-'''json
+```json
 {
   "code": 200,
   "success": true
 }
-'''
+```
 
 GET api/rooms
 returns a list of rooms and their respective things
