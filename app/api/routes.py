@@ -109,7 +109,7 @@ def patch_room(id):
         raise ApiError(404, 'The requested room was not found', request.url)
     
     room.name = name
-    room.patch
+    room.patch()
 
     return {
         'success': True,
